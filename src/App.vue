@@ -1,32 +1,44 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+   <Login />
+   <Cuestionario />
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import axios from 'axios';
+import Login from '@/views/Login.vue'
+import Cuestionario from '@/views/Cuestionario.vue'
 
-#nav {
-  padding: 30px;
-}
+export default {
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  components : {
+    Login,
+    Cuestionario
+  },
+  data: () => ({
+    //
+    
+  }),
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  methods : {
+    testApi(){
+      console.log('test')
+      let pregunta = {
+         descripcion : "es una prueba de api"
+      }
+      axios.post('http://localhost:8000/api/pregunta/' , pregunta)
+           .then(
+             response => {
+               console.log('todo bien ' , response.data)
+             }
+           )
+           .catch(
+             err => {
+               console.log('error' , err)
+             }
+           )
+    }
+  },
+};
+</script>
