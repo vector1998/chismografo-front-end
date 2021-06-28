@@ -291,7 +291,16 @@ export default{
                  })
         },
         enviarCorreo(){
-
+          let urlRU = this.$store.getters.baseURLG + "usuario/correo/"
+          console.log('url email: ' , urlRU)
+          console.log('usuario: ' , this.usuario)
+          axios.post(urlRU , this.usuario)
+               .then(response => {
+                 console.log('correo mandado: ' , response.data)
+               })
+               .catch(err => {
+                 console.log('error: ' , err)
+               })
         }
     }
 
